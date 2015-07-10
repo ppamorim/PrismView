@@ -3,15 +3,15 @@
 [![Build Status](https://api.travis-ci.org/ppamorim/Cult.svg?branch=master)](https://travis-ci.org/ppamorim/Prism)
 [![JitPack](https://img.shields.io/github/release/ppamorim/Prism.svg?label=JitPack%20Maven)](https://jitpack.io/#ppamorim/Prism)
 
-Prism provides animations for your views, similar of the [Dragger][4], but with fragments!
+Prism provides animations for your views, similar to [Dragger][4], but with fragments!
 You can change the fragment of the PrismView any time.*
 
-*Needs to be better.
+*Needs to improve.
 
 Usage
 -----
 
-* 1. Extends your activity with PrismActivity, use the the method setContentView
+* 1. Extend your activity with PrismActivity, use the the method `setContentView`:
 
 ```java
 public class BaseActivity extends PrismActivity {
@@ -22,7 +22,7 @@ public class BaseActivity extends PrismActivity {
 }
 ```
 
-* 2. Then, call the method load(Fragment)
+* 2. Then, call the method `load(Fragment)`:
 
 ```java
   load(new YourFragment());
@@ -33,12 +33,12 @@ Import dependency
 
 * This library is under development yet, use at your own risk.
 
-This library use `appcompat-v7:22.1.1` and `rebound:0.3.8`.
+This library uses `appcompat-v7:22.1.1` and `rebound:0.3.8`.
 
-But why not to add in MavenCentral?
+But why not to add it in MavenCentral?
 Because it is so much bureaucratic.
 
-JitPack is there and is the future!
+JitPack is there and it is the future!
 
 Into your build.gradle:
 
@@ -64,6 +64,7 @@ Contributors
 ------------
 
 * [Pedro Paulo de Amorim][3]
+* [Marcelo Camargo][666]
 
 Developed By
 ------------
@@ -102,3 +103,4 @@ License
 [5]: https://github.com/JakeWharton/butterknife
 [6]: https://github.com/facebook/fresco
 [10]: ./art/logo.png
+[666]: https://github.com/haskellcamargo/

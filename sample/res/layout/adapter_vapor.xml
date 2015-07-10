@@ -6,4 +6,4 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     fresco:viewAspectRatio="1.77"
-    fresco:placeholderImage="@color/white"/>
+    fresco:placeholderImage="@color/prism_black"/>

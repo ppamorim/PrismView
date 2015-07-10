@@ -18,7 +18,6 @@ package com.github.ppamorim.prism.sample;
 import android.app.Application;
 import com.facebook.drawee.backends.pipeline.Fresco;
 
-
 public class VaporApplication extends Application {
 
   @Override public void onCreate() {

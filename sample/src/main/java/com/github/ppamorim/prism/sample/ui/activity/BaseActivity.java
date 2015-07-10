@@ -42,13 +42,13 @@ public class BaseActivity extends PrismActivity {
     ViewUtil.configRecyclerView(this, recyclerView);
     setSupportActionBar(toolbar);
     ActionBar actionBar = getSupportActionBar();
-    if(actionBar != null) {
+    if (actionBar != null) {
       actionBar.setTitle(getResources().getString(R.string.app_name));
     }
   }
 
   @Override public void onBackPressed() {
-    if(isRevelead()) {
+    if (isRevelead()) {
       hide();
       return;
     }

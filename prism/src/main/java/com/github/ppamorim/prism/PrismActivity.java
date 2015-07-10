@@ -89,11 +89,11 @@ public class PrismActivity extends AppCompatActivity {
    */
   @Override protected void onPostCreate(Bundle savedInstanceState) {
     super.onPostCreate(savedInstanceState);
-    if(mainView == null) {
+    if (mainView == null) {
       throw new IllegalStateException("mainView is null, did you set this view?");
     }
     root.addView(mainView);
-    if(prismView == null) {
+    if (prismView == null) {
       prismView = new FrameLayout(getApplicationContext());
       prismView.setId(prismView.getClass().hashCode());
     }
@@ -218,7 +218,7 @@ public class PrismActivity extends AppCompatActivity {
    * @param smallRatio Need to be smaller than or equals 1.
    */
   public void setSmallRatio(double smallRatio) {
-    if(smallRatio <= 1) {
+    if (smallRatio <= 1) {
       this.smallRatio = smallRatio;
     }
   }
@@ -287,7 +287,7 @@ public class PrismActivity extends AppCompatActivity {
 
     @Override public void onSpringAtRest(Spring spring) {
       super.onSpringAtRest(spring);
-      if(hideEnabled) {
+      if (hideEnabled) {
         if (spring.getCurrentValue() == 1) {
           showPrismView();
         } else {
@@ -302,7 +302,7 @@ public class PrismActivity extends AppCompatActivity {
    * @return Instance of moveSpring.
    */
   private Spring moveSpring() {
-    if(moveSpring == null) {
+    if (moveSpring == null) {
       moveSpring = SpringSystem
           .create()
           .createSpring()

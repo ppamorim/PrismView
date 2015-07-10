@@ -34,7 +34,7 @@ public class ActivityHelper {
    * @return the width of this activity
    */
   public static int getWidth(Window window) {
-    if(measuredWidth == -1) {
+    if (measuredWidth == -1) {
       if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
         Point size = new Point();
         window.getWindowManager().getDefaultDisplay().getSize(size);

@@ -1,1 +1,1 @@
-include ':prism', ':sample'
+include ':prism'

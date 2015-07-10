@@ -10,8 +10,6 @@ You can change the fragment of the PrismView any time.*
 
 ![Sample 1][11]
 
-*Trust
-
 Usage
 -----
 

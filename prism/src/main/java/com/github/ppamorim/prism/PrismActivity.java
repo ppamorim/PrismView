@@ -17,7 +17,6 @@ package com.github.ppamorim.prism;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
@@ -31,8 +30,8 @@ import com.facebook.rebound.SpringSystem;
 import com.facebook.rebound.SpringUtil;
 
 /**
- * This class that extends #AppCompatActivity provides a Facebook like
- * transition for your activity, this uses Rebound to provide these animations.
+ * Provides a Facebook like
+ * transition for your activity, this uses Rebound to provide the animations.
  */
 public class PrismActivity extends AppCompatActivity {
 
@@ -54,7 +53,7 @@ public class PrismActivity extends AppCompatActivity {
   private Spring moveSpring;
 
   /**
-   * This initialize the RootView loading the activity_prism layout
+   * Initializes the RootView loading the activity_prism layout
    * and add the view of the #layoutResID in the root view.
    *
    * @param layoutResID Main view layout.
@@ -103,7 +102,7 @@ public class PrismActivity extends AppCompatActivity {
   }
 
   /**
-   * Add the listener for moveSpring when the activity is resumed.
+   * Add listener for moveSpring when the activity is resumed.
    */
   @Override protected void onResume() {
     super.onResume();
@@ -119,17 +118,16 @@ public class PrismActivity extends AppCompatActivity {
   }
 
   /**
-   * This inflate the base layout if this library.
+   * Inflates the base layout if this library.
    * @return return the root view.
    */
   private FrameLayout initializeRootView() {
-    root = (FrameLayout) LayoutInflater.from(getApplicationContext())
+    return (FrameLayout) LayoutInflater.from(getApplicationContext())
         .inflate(R.layout.activity_prism, null, false);
-    return root;
   }
 
   /**
-   * Instantiate the #mainView.
+   * Instantiates the #mainView.
    * @param mainView Return a instantiated #mainView.
    */
   private void initialize(View mainView) {
@@ -137,12 +135,10 @@ public class PrismActivity extends AppCompatActivity {
   }
 
   /**
-   * Get the width of the activity and set the X position
-   * at the end of the #mainView.
+   * Sets X position of the main view.
    */
   private void initializePositions() {
-    activityWidth = ActivityHelper.getWidth(getWindow());
-    ViewCompat.setX(prismView, activityWidth);
+    ViewCompat.setX(prismView, ActivityHelper.getWidth(getWindow()));
   }
 
   /**
@@ -151,8 +147,9 @@ public class PrismActivity extends AppCompatActivity {
    * @param fragment Instance of fragment.
    */
   public void load(Fragment fragment) {
-    FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-    ft.replace(prismView.getId(), fragment).commit();
+    (getSupportFragmentManager().beginTransaction())
+      .replace(prismView.getId(), fragment)
+      .commit();
     prismView.postDelayed(new Runnable() {
       @Override public void run() {
         reveal();

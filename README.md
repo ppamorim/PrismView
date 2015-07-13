@@ -18,8 +18,8 @@ Usage
 ```java
 public class BaseActivity extends PrismActivity {
   @Override protected void onCreate(Bundle savedInstanceState) {
-      super.onCreate(savedInstanceState);
-      setContentView(R.layout.activity_base);
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_base);
   }
 }
 ```

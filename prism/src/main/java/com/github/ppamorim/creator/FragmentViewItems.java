@@ -13,12 +13,13 @@
 * See the License for the specific language governing permissions and
 * limitations under the License.
 */
-package com.github.ppamorim.prism;
+package com.github.ppamorim.creator;
 
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.StringRes;
 import android.support.v4.app.Fragment;
+import com.github.ppamorim.collection.FragmentItems;
 
 public class FragmentViewItems extends FragmentItems<FragmentViewItem> {
 

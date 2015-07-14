@@ -16,6 +16,7 @@
 package com.github.ppamorim.prism;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -28,6 +29,8 @@ import com.facebook.rebound.Spring;
 import com.facebook.rebound.SpringConfig;
 import com.facebook.rebound.SpringSystem;
 import com.facebook.rebound.SpringUtil;
+import com.github.ppamorim.collection.PrismItemAdapter;
+import com.github.ppamorim.creator.FragmentViewItemAdapter;
 
 /**
  * Provides a Facebook like
@@ -49,6 +52,8 @@ public class PrismActivity extends AppCompatActivity {
   private FrameLayout root;
   private View mainView;
   private FrameLayout prismView;
+
+  private FragmentViewItemAdapter fragmentViewItemAdapter;
 
   private Spring moveSpring;
 
@@ -122,8 +127,9 @@ public class PrismActivity extends AppCompatActivity {
    * @return return the root view.
    */
   private FrameLayout initializeRootView() {
-    return (FrameLayout) LayoutInflater.from(getApplicationContext())
+    root = (FrameLayout) LayoutInflater.from(getApplicationContext())
         .inflate(R.layout.activity_prism, null, false);
+    return root;
   }
 
   /**
@@ -144,17 +150,28 @@ public class PrismActivity extends AppCompatActivity {
   /**
    * Load and replace the #prismView with a fragment.
    * Then, lazily performs a animation (reveal).
-   * @param fragment Instance of fragment.
+   * @param fragmentViewItemAdapter Instance of FragmentViewItemAdapter.
    */
-  public void load(Fragment fragment) {
-    (getSupportFragmentManager().beginTransaction())
-      .replace(prismView.getId(), fragment)
-      .commit();
-    prismView.postDelayed(new Runnable() {
+  public void setAdapter(FragmentViewItemAdapter fragmentViewItemAdapter) {
+    this.fragmentViewItemAdapter = fragmentViewItemAdapter;
+  }
+
+  public void ad(Fragment fragment) {
+    //(getSupportFragmentManager().beginTransaction())
+    //    .replace(prismView.getId(), fragment)
+    //    .commit();
+  }
+
+  public void show(int position) {
+    if(fragmentViewItemAdapter == null) {
+      throw new IllegalStateException("adapter is null");
+    }
+
+    new Handler().postDelayed(new Runnable() {
       @Override public void run() {
         reveal();
       }
-    }, 200);
+    }, 1000);
   }
 
   /**
@@ -259,6 +276,7 @@ public class PrismActivity extends AppCompatActivity {
    * Reset the view to perform the reveal or hide animation.
    */
   private void reset() {
+    initializePositions();
     prismView.setVisibility(View.VISIBLE);
     mainView.setVisibility(View.VISIBLE);
   }
@@ -276,7 +294,7 @@ public class PrismActivity extends AppCompatActivity {
       float ratio =  (float) SpringUtil.mapValueFromRangeToRange(spring.getCurrentValue(), 0, 1,
           1, smallRatio);
       ViewCompat.setTranslationX(prismView, (float) SpringUtil.mapValueFromRangeToRange(
-          spring.getCurrentValue(), 0, 1, activityWidth, 0));
+          spring.getCurrentValue(), 0, 1, activityWidth/2, 0));
       ViewCompat.setScaleX(mainView, ratio);
       ViewCompat.setScaleY(mainView, ratio);
       ViewCompat.setAlpha(mainView, ratio);

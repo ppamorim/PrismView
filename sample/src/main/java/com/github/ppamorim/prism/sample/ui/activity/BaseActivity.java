@@ -21,6 +21,10 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import com.github.ppamorim.collection.PrismItemAdapter;
+import com.github.ppamorim.collection.PrismItems;
+import com.github.ppamorim.creator.FragmentViewItemAdapter;
+import com.github.ppamorim.creator.FragmentViewItems;
 import com.github.ppamorim.prism.PrismActivity;
 import com.github.ppamorim.prism.sample.R;
 import com.github.ppamorim.prism.sample.ui.fragment.HappyFragment;
@@ -45,6 +49,8 @@ public class BaseActivity extends PrismActivity {
     if (actionBar != null) {
       actionBar.setTitle(getResources().getString(R.string.app_name));
     }
+    configPrism();
+    ad(new HappyFragment());
   }
 
   @Override public void onBackPressed() {
@@ -55,8 +61,19 @@ public class BaseActivity extends PrismActivity {
     super.onBackPressed();
   }
 
+  private void configPrism() {
+    FragmentViewItemAdapter fragmentViewItemAdapter =
+        new FragmentViewItemAdapter(FragmentViewItems.with(this)
+        .add("teste", HappyFragment.class)
+        .add("teste2", HappyFragment.class)
+        .add("teste3", HappyFragment.class)
+        .add("teste4", HappyFragment.class)
+        .create());
+    setAdapter(fragmentViewItemAdapter);
+  }
+
   public void onVaporClick(int position) {
-    load(new HappyFragment());
+    show(position);
   }
 
 }

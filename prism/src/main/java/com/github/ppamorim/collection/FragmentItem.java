@@ -13,21 +13,18 @@
 * See the License for the specific language governing permissions and
 * limitations under the License.
 */
-package com.github.ppamorim.prism;
+package com.github.ppamorim.collection;
 
-import android.content.Context;
-import java.util.ArrayList;
+public abstract class FragmentItem {
 
-public abstract class FragmentItems<T extends FragmentItem> extends ArrayList<T> {
+  private final CharSequence tag;
 
-  private final Context context;
-
-  protected FragmentItems(Context context) {
-    this.context = context;
+  protected FragmentItem(CharSequence tag) {
+    this.tag = tag;
   }
 
-  public Context getContext() {
-    return context;
+  public CharSequence getTag() {
+    return tag;
   }
 
 }

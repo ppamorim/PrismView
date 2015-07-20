@@ -1,6 +1,7 @@
 ![Logo 1][10]
 
 [![Build Status](https://api.travis-ci.org/ppamorim/Cult.svg?branch=master)](https://travis-ci.org/ppamorim/Prism)
+[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Prism-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/2166)
 [![JitPack](https://img.shields.io/github/release/ppamorim/Prism.svg?label=JitPack%20Maven)](https://jitpack.io/#ppamorim/Prism)
 
 Prism provides animations for your views, similar to [Dragger][4], but with fragments!

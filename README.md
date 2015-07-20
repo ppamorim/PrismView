@@ -20,14 +20,32 @@ public class BaseActivity extends PrismActivity {
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_base);
+    setPrismPosition(PrismPosition.RIGHT); //optional
+    setSpringType(SpringType.SPEEDBOUNCESS); //optional
+    setBouncenessSpeed(5, 5); //optional
   }
 }
 ```
 
-* 2. Then, call the method `load(Fragment)`:
+* 2. Create and set the adapter
 
 ```java
-  load(new YourFragment());
+@Override protected void onPostCreate(Bundle savedInstanceState) {
+    super.onPostCreate(savedInstanceState);
+    FragmentViewItemAdapter fragmentViewItemAdapter =
+              new FragmentViewItemAdapter(FragmentViewItems.with(this)
+                .add("tag0", Fragment0.class)
+                .add("tag1", Fragment1.class)
+                .create());
+    setAdapter(fragmentViewItemAdapter);
+  }
+
+```
+
+* 3. Then, call the page!
+
+```java
+show(position);
 ```
 
 Import dependency
@@ -60,7 +78,7 @@ dependencies {
 Todo
 ----
 
-* Support multiples fragments
+* Change position on runtime
 
 Contributors
 ------------

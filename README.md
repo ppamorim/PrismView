@@ -89,7 +89,10 @@ Contributors
 Developed By
 ------------
 
-* Pedro Paulo de Amorim - <pp.amorim@hotmail.com>
+* Pedro Paulo de Amorim
+
+Outlook: <pp.amorim@hotmail.com>
+Gmail: <pepa.amorim@gmail.com>
 
 <a href="https://www.linkedin.com/profile/view?id=185411359">
   <img alt="Add me to Linkedin" src="http://imageshack.us/a/img41/7877/smallld.png" />

@@ -77,6 +77,15 @@ Todo
 
 * Change position on runtime
 * Fix activity lifecycle
+* 
+
+Sample
+------
+
+<a href="https://play.google.com/store/apps/details?id=com.github.ppamorim.prism.sample">
+  <img alt="Get it on Google Play"
+       src="https://developer.android.com/images/brand/en_generic_rgb_wo_60.png" />
+</a>
 
 Contributors
 ------------
@@ -124,6 +133,7 @@ License
 [4]: https://github.com/ppamorim/Dragger
 [5]: https://github.com/JakeWharton/butterknife
 [6]: https://github.com/facebook/fresco
+[7]: https://play.google.com/store/apps/details?id=com.github.ppamorim.prism.sample
 [10]: ./art/logo.png
 [11]: ./art/sample.gif
 [666]: https://github.com/haskellcamargo/

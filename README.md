@@ -18,16 +18,34 @@ Usage
 ```java
 public class BaseActivity extends PrismActivity {
   @Override protected void onCreate(Bundle savedInstanceState) {
-      super.onCreate(savedInstanceState);
-      setContentView(R.layout.activity_base);
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_base);
+    setPrismPosition(PrismPosition.RIGHT); //optional, Use: LEFT, RIGHT, TOP, BOTTOM
+    setSpringType(SpringType.SPEEDBOUNCINESS); //optional, Use: ORIGAMI, SPEEDBOUNCINESS
+    setBouncenessSpeed(5, 5); //optional
   }
 }
 ```
 
-* 2. Then, call the method `load(Fragment)`:
+* 2. Create and set the adapter:
 
 ```java
-  load(new YourFragment());
+@Override protected void onPostCreate(Bundle savedInstanceState) {
+    super.onPostCreate(savedInstanceState);
+    FragmentViewItemAdapter fragmentViewItemAdapter =
+              new FragmentViewItemAdapter(FragmentViewItems.with(this)
+                .add("tag0", Fragment0.class)
+                .add("tag1", Fragment1.class)
+                .create());
+    setAdapter(fragmentViewItemAdapter);
+  }
+
+```
+
+* 3. Then, call the page!
+
+```java
+show(position);
 ```
 
 Import dependency
@@ -53,14 +71,14 @@ repositories {
 }
 
 dependencies {
-  compile 'com.github.ppamorim:prism:0.1'
+  compile 'com.github.ppamorim:prism:0.2'
 }
 ```
 
 Todo
 ----
 
-* Support multiples fragments
+* Change position on runtime
 
 Contributors
 ------------
@@ -71,7 +89,11 @@ Contributors
 Developed By
 ------------
 
-* Pedro Paulo de Amorim - <pp.amorim@hotmail.com>
+* Pedro Paulo de Amorim
+
+Outlook: <pp.amorim@hotmail.com>
+
+Gmail: <pepa.amorim@gmail.com>
 
 <a href="https://www.linkedin.com/profile/view?id=185411359">
   <img alt="Add me to Linkedin" src="http://imageshack.us/a/img41/7877/smallld.png" />
@@ -105,5 +127,5 @@ License
 [5]: https://github.com/JakeWharton/butterknife
 [6]: https://github.com/facebook/fresco
 [10]: ./art/logo.png
-[11]: ./art/sample.png
+[11]: ./art/sample.gif
 [666]: https://github.com/haskellcamargo/

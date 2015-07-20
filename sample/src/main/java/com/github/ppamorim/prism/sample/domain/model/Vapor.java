@@ -21,13 +21,19 @@ import com.github.ppamorim.recyclerrenderers.interfaces.Renderable;
 public class Vapor implements Renderable {
 
   private String url;
+  private String title;
 
-  public Vapor(String url) {
+  public Vapor(String title, String url) {
+    this.title = title;
     this.url = url;
   }
 
   public String getUrl() {
     return url;
+  }
+
+  public String getTitle() {
+    return title;
   }
 
   @Override public int getRenderableResourceId(int i) {

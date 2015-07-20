@@ -25,15 +25,15 @@ import android.view.Window;
 public class ActivityHelper {
 
   private static int measuredWidth = -1;
+  private static int measuredHeight = -1;
 
   /**
-   * Get the width of the activity, before, check the version
+   * Get the width and height of the activity, before, check the version
    * of the Android to use the proper method to get that value.
    *
    * @param window get the widow of the activity
-   * @return the width of this activity
    */
-  public static int getWidth(Window window) {
+  public void config(Window window) {
     if (measuredWidth == -1) {
       if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
         Point size = new Point();
@@ -43,7 +43,23 @@ public class ActivityHelper {
         measuredWidth = window.getWindowManager().getDefaultDisplay().getWidth();
       }
     }
+    if (measuredHeight == -1) {
+      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
+        Point size = new Point();
+        window.getWindowManager().getDefaultDisplay().getSize(size);
+        measuredHeight = size.y;
+      } else {
+        measuredHeight = window.getWindowManager().getDefaultDisplay().getHeight();
+      }
+    }
+  }
+
+  public int getWidth() {
     return measuredWidth;
+  }
+
+  public int getHeight() {
+    return measuredHeight;
   }
 
 }

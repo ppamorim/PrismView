@@ -15,9 +15,9 @@
 */
 package com.github.ppamorim.prism;
 
+import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Handler;
-import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
@@ -29,7 +29,8 @@ import com.facebook.rebound.Spring;
 import com.facebook.rebound.SpringConfig;
 import com.facebook.rebound.SpringSystem;
 import com.facebook.rebound.SpringUtil;
-import com.github.ppamorim.collection.PrismItemAdapter;
+import com.github.ppamorim.PrismPosition;
+import com.github.ppamorim.SpringType;
 import com.github.ppamorim.creator.FragmentViewItemAdapter;
 
 /**
@@ -40,14 +41,18 @@ public class PrismActivity extends AppCompatActivity {
 
   public static final int DEFAULT_TENSION = 40;
   public static final int DEFAULT_FRICTION = 5;
+  public static final int DEFAULT_BOUNCENESS = 0;
+  public static final int DEFAULT_SPEED = 20;
   public static final double DEFAULT_SMALL_RATIO = 0.8;
 
   private boolean hideEnabled = true;
-  private int activityWidth;
 
-  public int tension = DEFAULT_TENSION;
-  public int friction = DEFAULT_FRICTION;
+  public int firstValue;
+  public int secondValue;
   public double smallRatio = DEFAULT_SMALL_RATIO;
+
+  public PrismPosition prismPosition = PrismPosition.RIGHT;
+  public SpringType springType = SpringType.ORIGAMI;
 
   private FrameLayout root;
   private View mainView;
@@ -55,7 +60,14 @@ public class PrismActivity extends AppCompatActivity {
 
   private FragmentViewItemAdapter fragmentViewItemAdapter;
 
+  private ActivityHelper activityHelper;
   private Spring moveSpring;
+
+  @Override protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    activityHelper = new ActivityHelper();
+    activityHelper.config(getWindow());
+  }
 
   /**
    * Initializes the RootView loading the activity_prism layout
@@ -111,7 +123,7 @@ public class PrismActivity extends AppCompatActivity {
    */
   @Override protected void onResume() {
     super.onResume();
-    moveSpring().addListener(simpleSpringListener);
+    initializeListeners();
   }
 
   /**
@@ -119,7 +131,7 @@ public class PrismActivity extends AppCompatActivity {
    */
   @Override protected void onPause() {
     super.onPause();
-    moveSpring().removeListener(simpleSpringListener);
+    moveSpring().removeAllListeners();
   }
 
   /**
@@ -144,7 +156,33 @@ public class PrismActivity extends AppCompatActivity {
    * Sets X position of the main view.
    */
   private void initializePositions() {
-    ViewCompat.setX(prismView, ActivityHelper.getWidth(getWindow()));
+    if(prismView != null && activityHelper != null) {
+      if (prismPosition == PrismPosition.RIGHT) {
+        ViewCompat.setTranslationX(prismView, activityHelper.getWidth());
+      } else if (prismPosition == PrismPosition.LEFT) {
+        ViewCompat.setTranslationX(prismView, -activityHelper.getWidth());
+      } else if (prismPosition == PrismPosition.TOP) {
+        ViewCompat.setTranslationY(prismView, -activityHelper.getHeight());
+      } else if (prismPosition == PrismPosition.BOTTOM) {
+        ViewCompat.setTranslationY(prismView, activityHelper.getHeight());
+      }
+    }
+  }
+
+  private void initializeListeners() {
+    SimpleSpringListener simpleSpringListener = null;
+    if(prismPosition == PrismPosition.RIGHT) {
+      simpleSpringListener = translationRight;
+    } else if(prismPosition == PrismPosition.LEFT) {
+      simpleSpringListener = translationLeft;
+    } else if(prismPosition == PrismPosition.TOP) {
+      simpleSpringListener = translationTop;
+    } else if(prismPosition == PrismPosition.BOTTOM) {
+      simpleSpringListener = translationBottom;
+    }
+    if(simpleSpringListener != null) {
+      moveSpring().removeAllListeners().addListener(simpleSpringListener);
+    }
   }
 
   /**
@@ -156,22 +194,17 @@ public class PrismActivity extends AppCompatActivity {
     this.fragmentViewItemAdapter = fragmentViewItemAdapter;
   }
 
-  public void ad(Fragment fragment) {
-    //(getSupportFragmentManager().beginTransaction())
-    //    .replace(prismView.getId(), fragment)
-    //    .commit();
-  }
-
   public void show(int position) {
     if(fragmentViewItemAdapter == null) {
       throw new IllegalStateException("adapter is null");
     }
-
-    new Handler().postDelayed(new Runnable() {
-      @Override public void run() {
-        reveal();
-      }
-    }, 1000);
+    if(fragmentViewItemAdapter.getLoadedPosition() != position) {
+      fragmentViewItemAdapter.setLoadedPosition(position);
+      FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+      transaction.replace(prismView.getId(), fragmentViewItemAdapter.getItem(position));
+      transaction.commit();
+    }
+    reveal();
   }
 
   /**
@@ -190,34 +223,25 @@ public class PrismActivity extends AppCompatActivity {
     return hideEnabled;
   }
 
-  /**
-   * @return Tension of the animation.
-   */
-  public int getTension() {
-    return tension;
+
+  public void setOrigami(int tension, int friction) {
+    if(springType == SpringType.ORIGAMI) {
+      this.firstValue = tension;
+      this.secondValue = friction;
+    } else {
+      throw  new IllegalStateException("You must use SpringType.ORIGAMI"
+          + " if you want to use setOrigami");
+    }
   }
 
-  /**
-   * Set the tension of the animation.
-   * @param tension This value need to be bigger than zero.
-   */
-  public void setTension(int tension) {
-    this.tension = tension;
-  }
-
-  /**
-   * @return Friction of the animation.
-   */
-  public int getFriction() {
-    return friction;
-  }
-
-  /**
-   * Set the friction of the animation.
-   * @param friction This value need to be bigger than zero.
-   */
-  public void setFriction(int friction) {
-    this.friction = friction;
+  public void setBouncenessSpeed(int bounceness, int speed) {
+    if(springType == SpringType.SPEEDBOUNCESS) {
+      this.firstValue = bounceness;
+      this.secondValue = speed;
+    } else {
+      throw  new IllegalStateException("You must use SpringType.SPEEDBOUNCESS"
+          + " if you want to use setSpeedBounceness");
+    }
   }
 
   /**
@@ -235,6 +259,38 @@ public class PrismActivity extends AppCompatActivity {
     if (smallRatio <= 1) {
       this.smallRatio = smallRatio;
     }
+  }
+
+  /**
+   * @return Type of the spring mode
+   */
+  public SpringType getSpringType() {
+    return springType;
+  }
+
+  /**
+   * Set the type of spring mode
+   * @param springType Enum type
+   */
+  public void setSpringType(SpringType springType) {
+    this.springType = springType;
+  }
+
+  /**
+   * @return Position of the PrismView
+   */
+  public PrismPosition getPrismPosition() {
+    return prismPosition;
+  }
+
+  /**
+   * Set the side of the PrismView
+   * @param prismPosition Enum position
+   */
+  public void setPrismPosition(PrismPosition prismPosition) {
+    this.prismPosition = prismPosition;
+    initializePositions();
+    initializeListeners();
   }
 
   /**
@@ -288,42 +344,140 @@ public class PrismActivity extends AppCompatActivity {
    * At the finish of the animation, verify if the getCurrentValue()
    * is equals 1, if true, show the PrismView, else, show the MainView.
    */
-  private SimpleSpringListener simpleSpringListener = new SimpleSpringListener() {
+  private SimpleSpringListener translationRight = new SimpleSpringListener() {
     @Override public void onSpringUpdate(Spring spring) {
       super.onSpringUpdate(spring);
-      float ratio =  (float) SpringUtil.mapValueFromRangeToRange(spring.getCurrentValue(), 0, 1,
-          1, smallRatio);
+      double currentValue = spring.getCurrentValue();
       ViewCompat.setTranslationX(prismView, (float) SpringUtil.mapValueFromRangeToRange(
-          spring.getCurrentValue(), 0, 1, activityWidth/2, 0));
-      ViewCompat.setScaleX(mainView, ratio);
-      ViewCompat.setScaleY(mainView, ratio);
-      ViewCompat.setAlpha(mainView, ratio);
+          currentValue, 0, 1, activityHelper.getWidth(), 0));
+      mainViewUpdate(currentValue);
     }
 
     @Override public void onSpringAtRest(Spring spring) {
       super.onSpringAtRest(spring);
-      if (hideEnabled) {
-        if (spring.getCurrentValue() == 1) {
-          showPrismView();
-        } else {
-          showMainView();
-        }
-      }
+      onSpringAtRestOut(spring);
     }
   };
+
+  /**
+   * Create a new instance of SimpleSpringListener that performs
+   * a translationX, ScaleX, ScaleY and alpha value change.
+   *
+   * At the finish of the animation, verify if the getCurrentValue()
+   * is equals 1, if true, show the PrismView, else, show the MainView.
+   */
+  private SimpleSpringListener translationLeft = new SimpleSpringListener() {
+    @Override public void onSpringUpdate(Spring spring) {
+      super.onSpringUpdate(spring);
+      double currentValue = spring.getCurrentValue();
+      ViewCompat.setTranslationX(prismView, (float) SpringUtil.mapValueFromRangeToRange(
+          currentValue, 0, 1, -activityHelper.getWidth(), 0));
+      mainViewUpdate(currentValue);
+    }
+
+    @Override public void onSpringAtRest(Spring spring) {
+      super.onSpringAtRest(spring);
+      onSpringAtRestOut(spring);
+    }
+  };
+
+  /**
+   * Create a new instance of SimpleSpringListener that performs
+   * a translationX, ScaleX, ScaleY and alpha value change.
+   *
+   * At the finish of the animation, verify if the getCurrentValue()
+   * is equals 1, if true, show the PrismView, else, show the MainView.
+   */
+  private SimpleSpringListener translationTop = new SimpleSpringListener() {
+        @Override public void onSpringUpdate(Spring spring) {
+          super.onSpringUpdate(spring);
+          double currentValue = spring.getCurrentValue();
+          ViewCompat.setTranslationY(prismView,
+              (float) SpringUtil.mapValueFromRangeToRange(currentValue, 0, 1,
+                  -activityHelper.getHeight(), 0));
+          mainViewUpdate(currentValue);
+        }
+
+        @Override public void onSpringAtRest(Spring spring) {
+          super.onSpringAtRest(spring);
+          onSpringAtRestOut(spring);
+        }
+      };
+
+  /**
+   * Create a new instance of SimpleSpringListener that performs
+   * a translationX, ScaleX, ScaleY and alpha value change.
+   *
+   * At the finish of the animation, verify if the getCurrentValue()
+   * is equals 1, if true, show the PrismView, else, show the MainView.
+   */
+  private SimpleSpringListener translationBottom = new SimpleSpringListener() {
+    @Override public void onSpringUpdate(Spring spring) {
+      super.onSpringUpdate(spring);
+      double currentValue = spring.getCurrentValue();
+      ViewCompat.setTranslationY(prismView,
+          (float) SpringUtil.mapValueFromRangeToRange(currentValue, 0, 1,
+              activityHelper.getHeight(), 0));
+      mainViewUpdate(currentValue);
+    }
+
+    @Override public void onSpringAtRest(Spring spring) {
+      super.onSpringAtRest(spring);
+      onSpringAtRestOut(spring);
+    }
+  };
+
+  private void mainViewUpdate(double currentValue) {
+    float ratio =  (float) SpringUtil.mapValueFromRangeToRange(currentValue, 0, 1,
+        1, smallRatio);
+    ViewCompat.setScaleX(mainView, ratio);
+    ViewCompat.setScaleY(mainView, ratio);
+    ViewCompat.setAlpha(mainView, ratio);
+  }
+
+  private void onSpringAtRestOut(Spring spring) {
+    if (hideEnabled) {
+      if (spring.getCurrentValue() == 1) {
+        showPrismView();
+      } else {
+        showMainView();
+      }
+    }
+  }
 
   /**
    * Create a new Instance of moveSpring if it's needed.
    * @return Instance of moveSpring.
    */
   private Spring moveSpring() {
+
+    SpringConfig springConfig = null;
+    if(springType == SpringType.ORIGAMI) {
+      if(isValuesNotSet()) {
+        firstValue = DEFAULT_TENSION;
+        secondValue = DEFAULT_FRICTION;
+      }
+      springConfig = SpringConfig.fromOrigamiTensionAndFriction(firstValue, secondValue);
+    } else if(springType == SpringType.SPEEDBOUNCESS) {
+      if(isValuesNotSet()) {
+        firstValue = DEFAULT_BOUNCENESS;
+        secondValue = DEFAULT_SPEED;
+      }
+      springConfig = SpringConfig.fromBouncinessAndSpeed(firstValue, secondValue);
+    }
+
     if (moveSpring == null) {
-      moveSpring = SpringSystem
-          .create()
-          .createSpring()
-          .setSpringConfig(SpringConfig.fromOrigamiTensionAndFriction(tension, friction));
+      if(springConfig != null) {
+        moveSpring = SpringSystem.create().createSpring().setSpringConfig(springConfig);
+      }
+    } else {
+      moveSpring.setSpringConfig(springConfig);
     }
     return moveSpring;
+  }
+
+  private boolean isValuesNotSet() {
+    return firstValue == -1 || secondValue == -1;
   }
 
 }

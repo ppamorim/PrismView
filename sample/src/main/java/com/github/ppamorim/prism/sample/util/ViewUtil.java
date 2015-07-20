@@ -54,7 +54,7 @@ public class ViewUtil {
     LinearLayoutManager layoutManager = new LinearLayoutManager(context);
     recyclerView.addItemDecoration(new MarginDecoration(context));
     recyclerView.setLayoutManager(layoutManager);
-    recyclerView.setAdapter(new RendererAdapter<Vapor>(VaporProvider.generateVapors(),
+    recyclerView.setAdapter(new RendererAdapter<Vapor>(VaporProvider.generateVapors(context),
         new RendererBuilder(new VaporFactory()), LayoutInflater.from(context)));
   }
 

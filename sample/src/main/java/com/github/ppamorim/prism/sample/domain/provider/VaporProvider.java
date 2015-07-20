@@ -15,19 +15,22 @@
 */
 package com.github.ppamorim.prism.sample.domain.provider;
 
+import android.content.Context;
+import com.github.ppamorim.prism.sample.R;
 import com.github.ppamorim.prism.sample.domain.model.Vapor;
 import java.util.ArrayList;
 
 public class VaporProvider {
-  public static ArrayList<Vapor> generateVapors() {
+  public static ArrayList<Vapor> generateVapors(Context context) {
     ArrayList<Vapor> consoles = new ArrayList<>();
-    consoles.add(new Vapor("http://31.media.tumblr.com/84d0b0f22170e2b949f92671df2ed81b/"
+    String[] titles = context.getResources().getStringArray(R.array.positions);
+    consoles.add(new Vapor(titles[0], "http://31.media.tumblr.com/84d0b0f22170e2b949f92671df2ed81b/"
         + "tumblr_n33hnsqXrO1sey9vmo2_500.gif"));
-    consoles.add(new Vapor("http://media.giphy.com/media/6odBqErGYWyNG/giphy.gif"));
-    consoles.add(new Vapor("http://33.media.tumblr.com/07d610f83d41d2339c827c748bc11728/"
+    consoles.add(new Vapor(titles[1], "http://media.giphy.com/media/6odBqErGYWyNG/giphy.gif"));
+    consoles.add(new Vapor(titles[2], "http://33.media.tumblr.com/07d610f83d41d2339c827c748bc11728/"
         + "tumblr_inline_nodct8kSr81rvgpz7_500.gif"));
-    consoles.add(new Vapor("http://media.giphy.com/media/pWVCo5ZzQ6iOI/giphy.gif"));
-    consoles.add(new Vapor("http://media.giphy.com/media/bXKnukPw6sCd2/giphy.gif"));
+    consoles.add(new Vapor(titles[3], "http://media.giphy.com/media/pWVCo5ZzQ6iOI/giphy.gif"));
+    consoles.add(new Vapor(titles[3], "http://media.giphy.com/media/bXKnukPw6sCd2/giphy.gif"));
     return consoles;
   }
 }

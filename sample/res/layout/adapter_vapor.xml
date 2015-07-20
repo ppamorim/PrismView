@@ -1,9 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.facebook.drawee.view.SimpleDraweeView
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:fresco="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/image"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    fresco:viewAspectRatio="1.77"
-    fresco:placeholderImage="@color/prism_black"/>
+    android:layout_height="wrap_content">
+
+  <com.facebook.drawee.view.SimpleDraweeView
+      xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:fresco="http://schemas.android.com/apk/res-auto"
+      android:id="@+id/image"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      fresco:viewAspectRatio="1.77"
+      fresco:placeholderImage="@color/prism_black"/>
+
+  <TextView
+      android:id="@+id/type"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:padding="16dp"
+      android:background="@color/razzmatazz_dark"
+      android:textColor="@color/white"
+      android:visibility="gone"
+      android:layout_gravity="bottom"/>
+
+</FrameLayout>

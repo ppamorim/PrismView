@@ -21,13 +21,14 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import com.github.ppamorim.collection.PrismItemAdapter;
-import com.github.ppamorim.collection.PrismItems;
+import com.github.ppamorim.PrismPosition;
+import com.github.ppamorim.SpringType;
 import com.github.ppamorim.creator.FragmentViewItemAdapter;
 import com.github.ppamorim.creator.FragmentViewItems;
 import com.github.ppamorim.prism.PrismActivity;
 import com.github.ppamorim.prism.sample.R;
 import com.github.ppamorim.prism.sample.ui.fragment.HappyFragment;
+import com.github.ppamorim.prism.sample.ui.fragment.SadFragment;
 import com.github.ppamorim.prism.sample.util.ViewUtil;
 
 public class BaseActivity extends PrismActivity {
@@ -38,6 +39,9 @@ public class BaseActivity extends PrismActivity {
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_base);
+    setPrismPosition(PrismPosition.RIGHT);
+    setSpringType(SpringType.SPEEDBOUNCESS);
+    setBouncenessSpeed(5, 5);
   }
 
   @Override protected void onPostCreate(Bundle savedInstanceState) {
@@ -50,7 +54,6 @@ public class BaseActivity extends PrismActivity {
       actionBar.setTitle(getResources().getString(R.string.app_name));
     }
     configPrism();
-    ad(new HappyFragment());
   }
 
   @Override public void onBackPressed() {
@@ -64,11 +67,12 @@ public class BaseActivity extends PrismActivity {
   private void configPrism() {
     FragmentViewItemAdapter fragmentViewItemAdapter =
         new FragmentViewItemAdapter(FragmentViewItems.with(this)
-        .add("teste", HappyFragment.class)
-        .add("teste2", HappyFragment.class)
-        .add("teste3", HappyFragment.class)
-        .add("teste4", HappyFragment.class)
-        .create());
+          .add("happy0", HappyFragment.class)
+          .add("happy1", SadFragment.class)
+          .add("happy2", HappyFragment.class)
+          .add("happy3", SadFragment.class)
+          .add("happy4", HappyFragment.class)
+          .create());
     setAdapter(fragmentViewItemAdapter);
   }
 

@@ -16,6 +16,7 @@
 package com.github.ppamorim.prism.sample.ui.renderers.viewholder;
 
 import android.view.View;
+import android.widget.TextView;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import com.facebook.drawee.view.SimpleDraweeView;
@@ -28,6 +29,7 @@ import com.github.ppamorim.recyclerrenderers.viewholder.RenderViewHolder;
 public class VaporViewHolder extends RenderViewHolder<Vapor> implements View.OnClickListener {
 
   @Bind(R.id.image) SimpleDraweeView image;
+  @Bind(R.id.type) TextView type;
 
   public VaporViewHolder(View itemView) {
     super(itemView);
@@ -40,6 +42,7 @@ public class VaporViewHolder extends RenderViewHolder<Vapor> implements View.OnC
   }
 
   @Override public void onBindView(Vapor vapor) {
+    type.setText(vapor.getTitle());
     ViewUtil.bind(image, vapor.getUrl());
   }
 

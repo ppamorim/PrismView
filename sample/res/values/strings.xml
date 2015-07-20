@@ -1,5 +1,11 @@
 <resources>
   <string name="app_name">Prism</string>
+  <string-array name="positions">
+    <item>Left</item>
+    <item>Right</item>
+    <item>Top</item>
+    <item>Bottom</item>
+  </string-array>
   <string name="vaporwave">ｖａｐｏｒｗａｖｅ\nミュージック</string>
   <string name="wtf">Vaporwave is a musical genre that emerged in the early 2010s from indie dance
     genres such as seapunk, witch house, and chillwave. Although there is much diversity and

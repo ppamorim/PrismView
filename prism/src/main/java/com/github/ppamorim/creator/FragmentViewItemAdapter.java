@@ -6,6 +6,8 @@ public class FragmentViewItemAdapter {
 
   private final FragmentViewItems fragmentViewItems;
 
+  private int loadedPosition = -1;
+
   public FragmentViewItemAdapter(FragmentViewItems fragmentViewItems) {
     this.fragmentViewItems = fragmentViewItems;
   }
@@ -16,6 +18,14 @@ public class FragmentViewItemAdapter {
 
   public Fragment getItem(int position) {
     return getFragmentViewItem(position).instantiate(fragmentViewItems.getContext(), position);
+  }
+
+  public int getLoadedPosition() {
+    return loadedPosition;
+  }
+
+  public void setLoadedPosition(int loadedPosition) {
+    this.loadedPosition = loadedPosition;
   }
 
   protected FragmentViewItem getFragmentViewItem(int position) {

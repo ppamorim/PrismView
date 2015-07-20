@@ -105,5 +105,5 @@ License
 [5]: https://github.com/JakeWharton/butterknife
 [6]: https://github.com/facebook/fresco
 [10]: ./art/logo.png
-[11]: ./art/sample.png
+[11]: ./art/sample.gif
 [666]: https://github.com/haskellcamargo/

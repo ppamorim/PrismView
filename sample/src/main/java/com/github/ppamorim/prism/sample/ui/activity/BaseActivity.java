@@ -40,7 +40,7 @@ public class BaseActivity extends PrismActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_base);
     setPrismPosition(PrismPosition.RIGHT);
-    setSpringType(SpringType.SPEEDBOUNCESS);
+    setSpringType(SpringType.SPEEDBOUNCINESS);
     setBouncenessSpeed(5, 5);
   }
 

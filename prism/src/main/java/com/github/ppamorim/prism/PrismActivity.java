@@ -15,7 +15,6 @@
 */
 package com.github.ppamorim.prism;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewCompat;
@@ -235,11 +234,11 @@ public class PrismActivity extends AppCompatActivity {
   }
 
   public void setBouncenessSpeed(int bounceness, int speed) {
-    if(springType == SpringType.SPEEDBOUNCESS) {
+    if(springType == SpringType.SPEEDBOUNCINESS) {
       this.firstValue = bounceness;
       this.secondValue = speed;
     } else {
-      throw  new IllegalStateException("You must use SpringType.SPEEDBOUNCESS"
+      throw  new IllegalStateException("You must use SpringType.SPEEDBOUNCINESS"
           + " if you want to use setSpeedBounceness");
     }
   }
@@ -458,7 +457,7 @@ public class PrismActivity extends AppCompatActivity {
         secondValue = DEFAULT_FRICTION;
       }
       springConfig = SpringConfig.fromOrigamiTensionAndFriction(firstValue, secondValue);
-    } else if(springType == SpringType.SPEEDBOUNCESS) {
+    } else if(springType == SpringType.SPEEDBOUNCINESS) {
       if(isValuesNotSet()) {
         firstValue = DEFAULT_BOUNCENESS;
         secondValue = DEFAULT_SPEED;

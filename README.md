@@ -20,14 +20,14 @@ public class BaseActivity extends PrismActivity {
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_base);
-    setPrismPosition(PrismPosition.RIGHT); //optional
-    setSpringType(SpringType.SPEEDBOUNCESS); //optional
+    setPrismPosition(PrismPosition.RIGHT); //optional, Use: LEFT, RIGHT, TOP, BOTTOM
+    setSpringType(SpringType.SPEEDBOUNCINESS); //optional, Use: ORIGAMI, SPEEDBOUNCINESS
     setBouncenessSpeed(5, 5); //optional
   }
 }
 ```
 
-* 2. Create and set the adapter
+* 2. Create and set the adapter:
 
 ```java
 @Override protected void onPostCreate(Bundle savedInstanceState) {

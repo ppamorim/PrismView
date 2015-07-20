@@ -19,5 +19,5 @@ package com.github.ppamorim;
  * Represent the type of animation
  */
 public enum SpringType {
-  SPEEDBOUNCESS, ORIGAMI
+  SPEEDBOUNCINESS, ORIGAMI
 }

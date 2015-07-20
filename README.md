@@ -71,7 +71,7 @@ repositories {
 }
 
 dependencies {
-  compile 'com.github.ppamorim:prism:0.1'
+  compile 'com.github.ppamorim:prism:0.2'
 }
 ```
 
@@ -92,6 +92,7 @@ Developed By
 * Pedro Paulo de Amorim
 
 Outlook: <pp.amorim@hotmail.com>
+
 Gmail: <pepa.amorim@gmail.com>
 
 <a href="https://www.linkedin.com/profile/view?id=185411359">

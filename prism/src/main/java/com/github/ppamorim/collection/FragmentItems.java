@@ -16,7 +16,6 @@
 package com.github.ppamorim.collection;
 
 import android.content.Context;
-import com.github.ppamorim.collection.FragmentItem;
 import java.util.ArrayList;
 
 public abstract class FragmentItems<T extends FragmentItem> extends ArrayList<T> {

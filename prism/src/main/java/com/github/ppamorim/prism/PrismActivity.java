@@ -466,7 +466,7 @@ public class PrismActivity extends AppCompatActivity {
     }
 
     if (moveSpring == null) {
-      if(springConfig != null) {
+      if (springConfig != null) {
         moveSpring = SpringSystem.create().createSpring().setSpringConfig(springConfig);
       }
     } else {

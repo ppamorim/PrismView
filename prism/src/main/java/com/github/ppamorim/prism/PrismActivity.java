@@ -155,7 +155,7 @@ public class PrismActivity extends AppCompatActivity {
    * Sets X position of the main view.
    */
   private void initializePositions() {
-    if(prismView != null && activityHelper != null) {
+    if (prismView != null && activityHelper != null) {
       if (prismPosition == PrismPosition.RIGHT) {
         ViewCompat.setTranslationX(prismView, activityHelper.getWidth());
       } else if (prismPosition == PrismPosition.LEFT) {
@@ -170,16 +170,16 @@ public class PrismActivity extends AppCompatActivity {
 
   private void initializeListeners() {
     SimpleSpringListener simpleSpringListener = null;
-    if(prismPosition == PrismPosition.RIGHT) {
+    if (prismPosition == PrismPosition.RIGHT) {
       simpleSpringListener = translationRight;
-    } else if(prismPosition == PrismPosition.LEFT) {
+    } else if (prismPosition == PrismPosition.LEFT) {
       simpleSpringListener = translationLeft;
-    } else if(prismPosition == PrismPosition.TOP) {
+    } else if (prismPosition == PrismPosition.TOP) {
       simpleSpringListener = translationTop;
-    } else if(prismPosition == PrismPosition.BOTTOM) {
+    } else if (prismPosition == PrismPosition.BOTTOM) {
       simpleSpringListener = translationBottom;
     }
-    if(simpleSpringListener != null) {
+    if (simpleSpringListener != null) {
       moveSpring().removeAllListeners().addListener(simpleSpringListener);
     }
   }
@@ -194,10 +194,10 @@ public class PrismActivity extends AppCompatActivity {
   }
 
   public void show(int position) {
-    if(fragmentViewItemAdapter == null) {
+    if (fragmentViewItemAdapter == null) {
       throw new IllegalStateException("adapter is null");
     }
-    if(fragmentViewItemAdapter.getLoadedPosition() != position) {
+    if (fragmentViewItemAdapter.getLoadedPosition() != position) {
       fragmentViewItemAdapter.setLoadedPosition(position);
       FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
       transaction.replace(prismView.getId(), fragmentViewItemAdapter.getItem(position));
@@ -224,7 +224,7 @@ public class PrismActivity extends AppCompatActivity {
 
 
   public void setOrigami(int tension, int friction) {
-    if(springType == SpringType.ORIGAMI) {
+    if (springType == SpringType.ORIGAMI) {
       this.firstValue = tension;
       this.secondValue = friction;
     } else {
@@ -234,7 +234,7 @@ public class PrismActivity extends AppCompatActivity {
   }
 
   public void setBouncenessSpeed(int bounceness, int speed) {
-    if(springType == SpringType.SPEEDBOUNCINESS) {
+    if (springType == SpringType.SPEEDBOUNCINESS) {
       this.firstValue = bounceness;
       this.secondValue = speed;
     } else {
@@ -451,14 +451,14 @@ public class PrismActivity extends AppCompatActivity {
   private Spring moveSpring() {
 
     SpringConfig springConfig = null;
-    if(springType == SpringType.ORIGAMI) {
-      if(isValuesNotSet()) {
+    if (springType == SpringType.ORIGAMI) {
+      if (isValuesNotSet()) {
         firstValue = DEFAULT_TENSION;
         secondValue = DEFAULT_FRICTION;
       }
       springConfig = SpringConfig.fromOrigamiTensionAndFriction(firstValue, secondValue);
-    } else if(springType == SpringType.SPEEDBOUNCINESS) {
-      if(isValuesNotSet()) {
+    } else if (springType == SpringType.SPEEDBOUNCINESS) {
+      if (isValuesNotSet()) {
         firstValue = DEFAULT_BOUNCENESS;
         secondValue = DEFAULT_SPEED;
       }

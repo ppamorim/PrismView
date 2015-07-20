@@ -76,6 +76,7 @@ Todo
 ----
 
 * Change position on runtime
+* Fix activity lifecycle
 
 Contributors
 ------------

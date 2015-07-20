@@ -4,9 +4,7 @@
 [![JitPack](https://img.shields.io/github/release/ppamorim/Prism.svg?label=JitPack%20Maven)](https://jitpack.io/#ppamorim/Prism)
 
 Prism provides animations for your views, similar to [Dragger][4], but with fragments!
-You can change the fragment of the PrismView any time.*
-
-*Needs to improve.
+You can change the fragment of the PrismView any time.
 
 ![Sample 1][11]
 
@@ -51,9 +49,7 @@ show(position);
 Import dependency
 --------------------------------
 
-* This library is under development yet, use at your own risk.
-
-This library uses `appcompat-v7:22.1.1` and `rebound:0.3.8`.
+This library uses `appcompat-v7:22.2.0` and `rebound:0.3.8`.
 
 But why not to add it in MavenCentral?
 Because it is so much bureaucratic.

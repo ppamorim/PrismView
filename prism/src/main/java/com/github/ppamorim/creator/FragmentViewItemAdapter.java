@@ -29,7 +29,7 @@ public class FragmentViewItemAdapter {
   }
 
   protected FragmentViewItem getFragmentViewItem(int position) {
-    if(position >= fragmentViewItems.size()) {
+    if (position >= fragmentViewItems.size()) {
       throw new IllegalStateException("Your position is bigger than the size "
           + "of the fragmentViewItems");
     }

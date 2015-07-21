@@ -1,10 +1,10 @@
 ![Logo 1][10]
 
-[![Build Status](https://api.travis-ci.org/ppamorim/Cult.svg?branch=master)](https://travis-ci.org/ppamorim/Prism)
-[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Prism-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/2166)
-[![JitPack](https://img.shields.io/github/release/ppamorim/Prism.svg?label=JitPack%20Maven)](https://jitpack.io/#ppamorim/Prism)
+[![Build Status](https://api.travis-ci.org/ppamorim/Cult.svg?branch=master)](https://travis-ci.org/ppamorim/PrismView)
+[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-PrismView-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/2166)
+[![JitPack](https://img.shields.io/github/release/ppamorim/PrismView.svg?label=JitPack%20Maven)](https://jitpack.io/#ppamorim/PrismView)
 
-Prism provides animations for your views, similar to [Dragger][4], but with fragments!
+PrismView provides animations for your views, similar to [Dragger][4], but with fragments!
 You can change the fragment of the PrismView any time.
 
 ![Sample 1][11]
@@ -76,16 +76,6 @@ Todo
 ----
 
 * Change position on runtime
-* Fix activity lifecycle
-* 
-
-Sample
-------
-
-<a href="https://play.google.com/store/apps/details?id=com.github.ppamorim.prism.sample">
-  <img alt="Get it on Google Play"
-       src="https://developer.android.com/images/brand/en_generic_rgb_wo_60.png" />
-</a>
 
 Contributors
 ------------
@@ -133,7 +123,6 @@ License
 [4]: https://github.com/ppamorim/Dragger
 [5]: https://github.com/JakeWharton/butterknife
 [6]: https://github.com/facebook/fresco
-[7]: https://play.google.com/store/apps/details?id=com.github.ppamorim.prism.sample
 [10]: ./art/logo.png
 [11]: ./art/sample.gif
 [666]: https://github.com/haskellcamargo/

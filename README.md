@@ -68,7 +68,7 @@ repositories {
 }
 
 dependencies {
-  compile 'com.github.ppamorim:prism:0.2'
+  compile 'com.github.ppamorim:prismview:0.3'
 }
 ```
 

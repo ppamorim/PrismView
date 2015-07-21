@@ -8,7 +8,7 @@ repositories {
 }
 
 dependencies {
-  compile project (":prism")
+  compile project (":prismview")
   compile 'com.android.support:appcompat-v7:22.2.0'
   compile 'com.jakewharton:butterknife:7.0.0'
   compile 'com.github.ppamorim:recyclerrenderers:1.2.4'

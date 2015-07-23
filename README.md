@@ -119,6 +119,8 @@ License
     See the License for the specific language governing permissions and
     limitations under the License.
 
+Your bridge isn't important to me, you too.
+
 [3]: https://github.com/ppamorim/
 [4]: https://github.com/ppamorim/Dragger
 [5]: https://github.com/JakeWharton/butterknife
